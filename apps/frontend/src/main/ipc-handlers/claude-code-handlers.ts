@@ -8,7 +8,7 @@
  */
 
 import { ipcMain, shell } from 'electron';
-import { execFileSync, spawn } from 'child_process';
+import { execFileSync, spawn, exec } from 'child_process';
 import { existsSync, statSync } from 'fs';
 import path from 'path';
 import { IPC_CHANNELS } from '../../shared/constants/ipc';
@@ -248,8 +248,6 @@ export async function openTerminalWithCommand(command: string): Promise<void> {
 
     // For Windows, use exec with a properly formed command string
     // This is more reliable than spawn for complex PowerShell commands with pipes
-    const { exec } = require('child_process');
-
     const runWindowsCommand = (cmdString: string): Promise<void> => {
       return new Promise((resolve) => {
         console.log(`[Claude Code] Executing: ${cmdString}`);
